@@ -4,6 +4,7 @@ let dolist = document.getElementById("listelements");
 
 addbut.addEventListener("click", function(){
     
+    let paragraph = document.createElement('paragraph');
     let button = document.createElement('button');
     let br = document.createElement('br');
     let br1 = document.createElement('br');
