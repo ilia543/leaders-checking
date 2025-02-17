@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://127.0.0.1:5500/index.html">ბიბლიოთეკა</a>
+    <h1>წიგნები</h1>
+
+    <ul id="userbooklist"></ul>
+
+
+    <script>
+        const userbooklist = document.getElementById("userbooklist");
+
+        function userbooksget(){
+            let userbooks = JSON.parse(localStorage.getItem("userbooks"));
+            userbooklist.innerHTML = "";
+            userbooks.forEach(book =>{
+                const li = document.createElement("li");
+                li.textContent = book;
+                const removebutton = document.createElement("button");
+                removebutton.textContent = "წაშლა";
+                removebutton.onclick = function(){
+                    removebook(book);
+                }
+                li.appendChild(removebutton);
+                userbooklist.appendChild(li);
+            })  ;
+        };
+        function removebook(bookforremove){
+            let userbooks = JSON.parse(localStorage.getItem("userbooks"));
+            let newbooks = [];
+
+            for (let i = 0; i < userbooks.length; i++){
+                if (userbooks[i] !== bookforremove){
+                    newbooks.push(userbooks[i]);
+                }
+            }
+            localStorage.setItem("userbooks", JSON.stringify(newbooks));
+            userbooksget();
+        }
+        userbooksget()
+    </script>
+</body>
+</html>

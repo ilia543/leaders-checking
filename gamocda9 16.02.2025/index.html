@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://127.0.0.1:5500/index1.html">ჩემი წიგნები</a>
+    <h1>ბიბლიოთეკა</h1>
+    <h1>წიგნების სია</h1>
+    <ul id="booklist"></ul>
+
+
+    <script>
+        const booklist = document.getElementById("booklist");
+
+        const books = [
+            "ჰარიპოტერი",
+            "სიგმა ბოი",
+            "გთხოვთ მწვანე დამიწერეთ",
+            "ვაკა ვაკა ეეე",
+            "გოა ბესთ",
+            "მაიკოვსკი",
+            "პითონი",
+            "წიგნი",
+            "oild up მინიონს",
+            "სკიბიდი შრეკი"
+        ];
+
+        function func(){
+            booklist.innerHTML = "";
+            books.forEach(book =>{
+                const li = document.createElement("li");
+                li.textContent = book;
+                const addToUserBook = document.createElement("button");
+                addToUserBook.textContent = "add book";
+                addToUserBook.addEventListener("click", function(){
+                    addToUserLibrary(book);
+                })
+                li.appendChild(addToUserBook);
+                booklist.appendChild(li);
+                })
+        }
+
+        function isbookinuser(userbooks, book) {
+            for (let i = 0; i < userbooks.length; i++){
+                if (userbooks[i] ===book){
+                    return true
+                }
+            }
+            return false
+        }
+
+        function addToUserLibrary(book){
+            let userbooks = JSON.parse(localStorage.getItem("userbooks")) || [];
+            userbooks.push(book);
+            localStorage.setItem("userbooks", JSON.stringify(userbooks));
+        }
+
+
+        func()
+    </script>
+</body>
+</html>
